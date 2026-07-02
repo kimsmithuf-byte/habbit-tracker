@@ -1,467 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Habit Tracker</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-
-font-family:Georgia,serif;
-
-background:url("daily-faith-background copy.png.png") center center/cover no-repeat fixed;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-min-height:100vh;
-
-padding:20px;
-
+body {
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  background: url("daily-faith-background copy.png.png") center center / cover no-repeat fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
 }
 
-.card{
-
-width:100%;
-
-max-width:760px;
-
-background:rgba(255,241,245,.82);
-
-backdrop-filter:blur(12px);
-
-border-radius:28px;
-
-padding:30px;
-
-border:1px solid rgba(255,255,255,.5);
-
-box-shadow:0 15px 35px rgba(0,0,0,.12);
-
+.card {
+  width: 100%;
+  max-width: 760px;
+  background: rgba(255, 239, 244, 0.84);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 12px 35px rgba(135, 75, 92, 0.22);
+  backdrop-filter: blur(10px);
 }
 
-h1{
-
-font-size:48px;
-
-font-weight:400;
-
-color:#8b4b60;
-
-text-align:center;
-
-margin-bottom:8px;
-
+h1 {
+  text-align: center;
+  font-size: 46px;
+  font-weight: 400;
+  color: #8b4b60;
+  margin-bottom: 6px;
 }
 
-.subtitle{
-
-text-align:center;
-
-font-size:18px;
-
-color:#c77b94;
-
-margin-bottom:28px;
-
-font-style:italic;
-
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: #c77791;
+  font-style: italic;
+  margin-bottom: 24px;
 }
 
-table{
-
-width:100%;
-
-border-collapse:collapse;
-
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.18);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-th{
-
-font-size:14px;
-
-letter-spacing:1px;
-
-padding:14px;
-
-color:#c77791;
-
-border-bottom:2px solid rgba(199,119,145,.25);
-
+th {
+  color: #c77791;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 12px 6px;
+  border: 1px solid rgba(199,119,145,0.25);
 }
 
-td{
-
-padding:15px 8px;
-
-text-align:center;
-
-border-bottom:1px solid rgba(199,119,145,.15);
-
+td {
+  text-align: center;
+  padding: 13px 6px;
+  border: 1px solid rgba(199,119,145,0.22);
 }
 
-.habit{
-
-text-align:left;
-
-font-weight:600;
-
-color:#874b5c;
-
-font-size:15px;
-
+.habit {
+  text-align: left;
+  color: #7b3f4e;
+  font-weight: bold;
+  font-size: 15px;
+  width: 30%;
 }
 
-.circle{
-
-width:23px;
-
-height:23px;
-
-border-radius:50%;
-
-border:2px solid #d887a1;
-
-display:inline-block;
-
-background:white;
-
-cursor:pointer;
-
-transition:.25s;
-
+.note {
+  display: block;
+  font-size: 11px;
+  color: #b45f77;
+  font-weight: normal;
+  margin-top: 2px;
 }
 
-.circle:hover{
-
-background:#ffd7e3;
-
+.circle {
+  width: 23px;
+  height: 23px;
+  border: 2px solid #d887a1;
+  border-radius: 50%;
+  display: inline-block;
+  background: rgba(255,255,255,0.55);
+  cursor: pointer;
 }
 
-.off{
-
-color:#d4a2b3;
-
-font-size:22px;
-
+.circle.done {
+  background: #f6a9c2;
+  border-color: #f6a9c2;
+  box-shadow: 0 0 10px rgba(246,169,194,0.75);
 }
 
-.footer{
-
-margin-top:22px;
-
-text-align:center;
-
-color:#bf708b;
-
-font-style:italic;
-
-font-size:18px;
-
+.off {
+  color: #d28ca3;
+  font-size: 20px;
 }
 
-@media(max-width:650px){
-
-.card{
-
-padding:18px;
-
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #bd6f8a;
+  font-style: italic;
 }
 
-h1{
+@media (max-width: 650px) {
+  .card {
+    padding: 18px;
+  }
 
-font-size:36px;
+  h1 {
+    font-size: 34px;
+  }
 
+  .subtitle {
+    font-size: 14px;
+  }
+
+  th {
+    font-size: 10px;
+    padding: 8px 3px;
+  }
+
+  td {
+    padding: 9px 3px;
+  }
+
+  .habit {
+    font-size: 12px;
+  }
+
+  .note {
+    font-size: 9px;
+  }
+
+  .circle {
+    width: 18px;
+    height: 18px;
+  }
 }
-
-.subtitle{
-
-font-size:15px;
-
-}
-
-th{
-
-font-size:11px;
-
-padding:8px;
-
-}
-
-td{
-
-padding:10px 4px;
-
-}
-
-.habit{
-
-font-size:13px;
-
-}
-
-.circle{
-
-width:18px;
-
-height:18px;
-
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
-
 <div class="card">
-
-<h1>Habit Tracker ♡</h1>
-
-<div class="subtitle">
-
-little by little, a little becomes a lot ♡
-
-</div>
-
-<table>
-
-<tr>
-
-<th style="text-align:left;">Habit</th>
-
-<th>Sun</th>
-
-<th>Mon</th>
-
-<th>Tue</th>
-
-<th>Wed</th>
-
-<th>Thu</th>
-
-<th>Fri</th>
-
-<th>Sat</th>
-
-</tr>
-
-<tr>
-
-<td class="habit">
-
-💧 Drink Water
-
-</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-</tr>
-
-<tr>
-
-<td class="habit">
-
-🏋🏽 Workout
-
-</td>
-
-<td class="off">—</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td class="off">—</td>
-
-</tr>
-
-<tr>
-
-<td class="habit">
-
-📖 Bible Time
-
-</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-</tr> <tr>
-
-<td class="habit">
-
-📚 LSAT Study
-
-</td>
-
-<td class="off">—</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td class="off">—</td>
-
-</tr>
-
-<tr>
-
-<td class="habit">
-
-🥗 Eat Healthy
-
-</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-</tr>
-
-<tr>
-
-<td class="habit">
-
-🙏 Prayer
-
-</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-</tr>
-
-<tr>
-
-<td class="habit">
-
-💕 Gratitude
-
-</td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-<td><span class="circle"></span></td>
-
-</tr>
-
-</table>
-
-<div class="footer">
-
-discipline today, freedom tomorrow ✨
-
-</div>
-
+  <h1>Habit Tracker ♡</h1>
+  <div class="subtitle">little by little, a little becomes a lot ♡</div>
+
+  <table>
+    <tr>
+      <th style="text-align:left;">HABIT ♡</th>
+      <th>SUN</th>
+      <th>MON</th>
+      <th>TUE</th>
+      <th>WED</th>
+      <th>THU</th>
+      <th>FRI</th>
+      <th>SAT</th>
+    </tr>
+
+    <tr>
+      <td class="habit">💧 Drink Water <span class="note">8 glasses</span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+    </tr>
+
+    <tr>
+      <td class="habit">🏋🏽 Workout <span class="note">move my body</span></td>
+      <td class="off">—</td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td class="off">—</td>
+    </tr>
+
+    <tr>
+      <td class="habit">📖 Bible Time <span class="note">grow my faith</span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+    </tr>
+
+    <tr>
+      <td class="habit">📚 LSAT Study <span class="note">1% better</span></td>
+      <td class="off">—</td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td class="off">—</td>
+    </tr>
+
+    <tr>
+      <td class="habit">🥗 Eat Healthy <span class="note">fuel my body</span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+    </tr>
+
+    <tr>
+      <td class="habit">🙏 Prayer <span class="note">covered by God</span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+    </tr>
+
+    <tr>
+      <td class="habit">💕 Gratitude <span class="note">thankful heart</span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+      <td><span class="circle"></span></td>
+    </tr>
+  </table>
+
+  <div class="footer">discipline today, freedom tomorrow ✨</div>
 </div>
 
 <script>
-
-document.querySelectorAll(".circle").forEach(circle=>{
-
-circle.addEventListener("click",()=>{
-
-circle.classList.toggle("done");
-
-if(circle.classList.contains("done")){
-
-circle.style.background="#f8a8c2";
-circle.style.borderColor="#f8a8c2";
-
-}else{
-
-circle.style.background="white";
-circle.style.borderColor="#d887a1";
-
-}
-
+document.querySelectorAll(".circle").forEach(function(circle) {
+  circle.addEventListener("click", function() {
+    circle.classList.toggle("done");
+  });
 });
-
-});
-
 </script>
-
 </body>
-
 </html>
