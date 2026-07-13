@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Habbit Tracker</title>
+
+<title>Habit Tracker</title>
 
 <style>
 * {
@@ -15,7 +16,11 @@
 body {
   min-height: 100vh;
   font-family: Georgia, serif;
-  background: url("daily-faith-background copy.png.png") center center / cover no-repeat fixed;
+
+  background:
+    url("daily-faith-background copy.png.png")
+    center center / cover no-repeat fixed;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,10 +30,13 @@ body {
 .card {
   width: 100%;
   max-width: 760px;
+
   background: rgba(255, 239, 244, 0.84);
-  border: 1px solid rgba(255,255,255,0.65);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 28px;
+
   padding: 28px;
+
   box-shadow: 0 12px 35px rgba(135, 75, 92, 0.22);
   backdrop-filter: blur(10px);
 }
@@ -49,10 +57,16 @@ h1 {
   margin-bottom: 24px;
 }
 
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -62,21 +76,21 @@ th {
   font-size: 13px;
   letter-spacing: 1px;
   padding: 12px 6px;
-  border: 1px solid rgba(199,119,145,0.25);
+  border: 1px solid rgba(199, 119, 145, 0.25);
 }
 
 td {
   text-align: center;
   padding: 13px 6px;
-  border: 1px solid rgba(199,119,145,0.22);
+  border: 1px solid rgba(199, 119, 145, 0.22);
 }
 
-.habbit {
+.habit {
+  width: 30%;
   text-align: left;
   color: #7b3f4e;
   font-weight: bold;
   font-size: 15px;
-  width: 30%;
 }
 
 .note {
@@ -90,22 +104,117 @@ td {
 .circle {
   width: 23px;
   height: 23px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
   border: 2px solid #d887a1;
   border-radius: 50%;
-  display: inline-block;
-  background: rgba(255,255,255,0.55);
+
+  background: rgba(255, 255, 255, 0.55);
   cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.circle:hover {
+  transform: scale(1.08);
 }
 
 .circle.done {
   background: #f6a9c2;
   border-color: #f6a9c2;
-  box-shadow: 0 0 10px rgba(246,169,194,0.75);
+  box-shadow: 0 0 10px rgba(246, 169, 194, 0.75);
+}
+
+.circle.done::after {
+  content: "✓";
+  color: #7b3f4e;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .off {
   color: #d28ca3;
   font-size: 20px;
+}
+
+.progress-section {
+  margin-top: 20px;
+  padding: 16px;
+
+  border: 1px solid rgba(199, 119, 145, 0.28);
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #8b4b60;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+
+  margin-top: 10px;
+
+  background: rgba(199, 119, 145, 0.18);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #e58ca8,
+    #f6a9c2
+  );
+
+  transition: width 0.25s ease;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.reset-button {
+  padding: 10px 18px;
+
+  border: 1px solid rgba(139, 75, 96, 0.35);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.42);
+  color: #8b4b60;
+
+  font-family: Georgia, serif;
+  font-size: 14px;
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.reset-button:hover {
+  background: rgba(246, 169, 194, 0.35);
+  transform: translateY(-1px);
 }
 
 .footer {
@@ -138,7 +247,8 @@ td {
     padding: 9px 3px;
   }
 
-  .habbit {
+  .habit {
+    min-width: 125px;
     font-size: 12px;
   }
 
@@ -150,114 +260,258 @@ td {
     width: 18px;
     height: 18px;
   }
+
+  .circle.done::after {
+    font-size: 11px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <div class="card">
-  <h1>Habbit Tracker ♡</h1>
-  <div class="subtitle">little by little, a little becomes a lot ♡</div>
 
-  <table>
-    <tr>
-      <th style="text-align:left;">HABBIT ♡</th>
-      <th>SUN</th>
-      <th>MON</th>
-      <th>TUE</th>
-      <th>WED</th>
-      <th>THU</th>
-      <th>FRI</th>
-      <th>SAT</th>
-    </tr>
+  <h1>Habit Tracker ♡</h1>
 
-    <tr>
-      <td class="habbit">💧 Drink Water <span class="note">8 glasses</span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-    </tr>
+  <div class="subtitle">
+    little by little, a little becomes a lot ♡
+  </div>
 
-    <tr>
-      <td class="habbit">🏋🏽 Workout <span class="note">move my body</span></td>
-      <td class="off">—</td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td class="off">—</td>
-    </tr>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th style="text-align:left;">HABIT ♡</th>
+        <th>SUN</th>
+        <th>MON</th>
+        <th>TUE</th>
+        <th>WED</th>
+        <th>THU</th>
+        <th>FRI</th>
+        <th>SAT</th>
+      </tr>
 
-    <tr>
-      <td class="habbit">📖 Bible Time <span class="note">grow my faith</span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-    </tr>
+      <tr>
+        <td class="habit">
+          💧 Drink Water
+          <span class="note">8 glasses</span>
+        </td>
 
-    <tr>
-      <td class="habbit">📚 LSAT Study <span class="note">1% better</span></td>
-      <td class="off">—</td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td class="off">—</td>
-    </tr>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
 
-    <tr>
-      <td class="habbit">🥗 Eat Healthy <span class="note">fuel my body</span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-    </tr>
+      <tr>
+        <td class="habit">
+          🏋🏽 Workout
+          <span class="note">move my body</span>
+        </td>
 
-    <tr>
-      <td class="habbit">🙏 Prayer <span class="note">covered by God</span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-    </tr>
+        <td class="off">—</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td class="off">—</td>
+      </tr>
 
-    <tr>
-      <td class="habbit">💕 Gratitude <span class="note">thankful heart</span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-      <td><span class="circle"></span></td>
-    </tr>
-  </table>
+      <tr>
+        <td class="habit">
+          📖 Bible Time
+          <span class="note">grow my faith</span>
+        </td>
 
-  <div class="footer">discipline today, freedom tomorrow ✨</div>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+
+      <tr>
+        <td class="habit">
+          📚 LSAT Study
+          <span class="note">1% better</span>
+        </td>
+
+        <td class="off">—</td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td class="off">—</td>
+      </tr>
+
+      <tr>
+        <td class="habit">
+          🥗 Eat Healthy
+          <span class="note">fuel my body</span>
+        </td>
+
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+
+      <tr>
+        <td class="habit">
+          🙏 Prayer
+          <span class="note">covered by God</span>
+        </td>
+
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+
+      <tr>
+        <td class="habit">
+          💕 Gratitude
+          <span class="note">thankful heart</span>
+        </td>
+
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+        <td><span class="circle"></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-top">
+      <span>Weekly progress</span>
+      <span id="progress-text">0 / 45 completed</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="reset-button" id="reset-week">
+      Reset Week
+    </button>
+  </div>
+
+  <div class="footer">
+    discipline today, freedom tomorrow ✨
+  </div>
+
 </div>
 
 <script>
-document.querySelectorAll(".circle").forEach(function(circle) {
+const STORAGE_KEY = "kim-habit-tracker-week-v1";
+
+const circles = Array.from(
+  document.querySelectorAll(".circle")
+);
+
+const progressText = document.getElementById("progress-text");
+const progressFill = document.getElementById("progress-fill");
+const resetButton = document.getElementById("reset-week");
+
+function saveProgress() {
+  const completedStates = circles.map(function(circle) {
+    return circle.classList.contains("done");
+  });
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(completedStates)
+  );
+}
+
+function loadProgress() {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+
+  if (!savedData) {
+    updateProgress();
+    return;
+  }
+
+  try {
+    const completedStates = JSON.parse(savedData);
+
+    circles.forEach(function(circle, index) {
+      if (completedStates[index] === true) {
+        circle.classList.add("done");
+      } else {
+        circle.classList.remove("done");
+      }
+    });
+  } catch (error) {
+    console.error("Habit tracker data could not be loaded.", error);
+  }
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const completed = circles.filter(function(circle) {
+    return circle.classList.contains("done");
+  }).length;
+
+  const total = circles.length;
+  const percentage = total
+    ? Math.round((completed / total) * 100)
+    : 0;
+
+  progressText.textContent =
+    completed + " / " + total + " completed";
+
+  progressFill.style.width = percentage + "%";
+}
+
+circles.forEach(function(circle) {
   circle.addEventListener("click", function() {
     circle.classList.toggle("done");
+
+    updateProgress();
+    saveProgress();
   });
 });
+
+resetButton.addEventListener("click", function() {
+  const confirmed = window.confirm(
+    "Reset the entire habit tracker for this week?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  circles.forEach(function(circle) {
+    circle.classList.remove("done");
+  });
+
+  localStorage.removeItem(STORAGE_KEY);
+  updateProgress();
+});
+
+loadProgress();
 </script>
+
 </body>
 </html>
